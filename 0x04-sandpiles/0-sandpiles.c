@@ -53,7 +53,6 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		}
 		row++;
 	}
-
 	row = 0;
 	while ( row < 3)
 	{
@@ -72,7 +71,6 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 				right = column + 1;
 				up = row - 1;
 				down = row + 1;
-
 				if (left > -1)
 					grid2[row][left] += 1;
 				if (right < 3)
