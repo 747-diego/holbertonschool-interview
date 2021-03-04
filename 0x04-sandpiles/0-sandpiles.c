@@ -1,78 +1,91 @@
 #include "sandpiles.h"
 
+
+
+
 /**
- * printGrid - displays two sandpiles
- * @grid: individual stable grid 
+ * displayGrid - shows rows and columns
+ * @grid: rows and columns
  */
-void printGrid(int grid[3][3])
+void displayGrid(int grid[3][3])
 {
-	int i = 0;
-    int j = 0;
+	int row = 0;
+	int column = 0;
 
 	printf("=\n");
-
-	while (i < 3)
+	while (row < 3)
 	{
-		while (j < 3)
+		column = 0;
+		while (column < 3)
 		{
-			if (j)
+			if (column)
+			{
 				printf(" ");
-			printf("%d", grid[i][j]);
-            j++;
+			}
+			printf("%d", grid[row][column]);
+			column++;
 		}
+		row++;
 		printf("\n");
-        i++;
 	}
 }
-
 /**
  * sandpiles_sum - a function that computes the sum of two sandpiles
- * @grid1: indvidual stable grids
- * @grid2: indvidual stable grids
+ * @grid1: both grid1 and grid2 are individually stable
+ * @grid2: both grid1 and grid2 are individually stable
+ * Return: nada
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-	int i = 0;
-    int j = 0; 
-    int left, right, up, down, uneven = 0;
+	int row = 0;
+	int column = 0;
+	int left, right, up, down;
+	int odd = 0;
 
-	for (i = 0; i < 3; i++)
-		while (j < 3)
-		{
-			grid1[i][j] += grid2[i][j];
-			grid2[i][j] = 0;
-            j++;
-		}
-
-    i = 0;
-    j = 0;
-
-	for (i = 0; i < 3; i++)
+	while (row < 3)
 	{
-        while (j < 3)
-        {
-			if (grid1[i][j] > 3)
+		column = 0;
+		while ( column < 3)
+		{
+			grid1[row][column] += grid2[row][column];
+			grid2[row][column] = 0;
+			column++;
+		}
+		row++;
+	}
+
+	row = 0;
+	while ( row < 3)
+	{
+		column = 0;
+		while (column < 3)
+		{
+			if (grid1[row][column] > 3)
 			{
-				if (!uneven)
-					printGrid(grid1);
-				uneven = 1;
-				grid1[i][j] -=  4;
-				left = j - 1;
-				right = j + 1;
-				up = i - 1;
-				down = i + 1;
+				if (!odd)
+				{
+					displayGrid(grid1);
+				}
+				odd = 1;
+				grid1[row][column] -=  4;
+				left = column - 1;
+				right = column + 1;
+				up = row - 1;
+				down = row + 1;
+
 				if (left > -1)
-					grid2[i][left] += 1;
+					grid2[row][left] += 1;
 				if (right < 3)
-					grid2[i][right] += 1;
+					grid2[row][right] += 1;
 				if (up > -1)
-					grid2[up][j] += 1;
+					grid2[up][column] += 1;
 				if (down < 3)
-					grid2[down][j] += 1;
+					grid2[down][column] += 1;
 			}
-            j++;
-        }
-    }        
-	if (uneven)
+			column++;
+		}
+		row++;
+	}		
+	if (odd)
 		sandpiles_sum(grid1, grid2);
 }

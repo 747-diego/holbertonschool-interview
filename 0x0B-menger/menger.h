@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 
+
 /* PROTOTYPES */
 void menger(int level);
 char printHASH(int row, int column, int num);
