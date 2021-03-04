@@ -11,16 +11,16 @@ char printHASH(int row, int column, int num)
 {
 	if (num == 0)
 	{
-		return('#');
+		return ('#');
 	}
 	if ((row % (num * 3)) / num == 1)
 	{
 		if ((column % (num * 3)) / num == 1)
 		{
-			return(' ');
+			return (' ');
 		}
 	}
-	return(printHASH(row, column, num / 3));
+	return (printHASH(row, column, num / 3));
 }
 
 
