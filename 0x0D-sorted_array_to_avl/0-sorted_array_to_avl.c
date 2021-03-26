@@ -63,14 +63,6 @@ avl_t *treeNode(int *array, size_t size)
     }
 
 	tempNode->right = sorted_array_to_avl(&array[sizeOfArray++], div);
-    if (tempNode->right)
-    {
-	tempNode->right->parent = tempNode;
-    }
-	else if (div > 0)
-    {
-	return (NULL);
-    }
 	return (tempNode);
 }
 
