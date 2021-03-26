@@ -1,5 +1,5 @@
-#ifndef ARRAY_TO_AVL
-#define ARRAY_TO_AVL
+#ifndef _ARRAY_TO_AVL_
+#define _ARRAY_TO_AVL_
 
 /* HEADER FILES */
 #include <stdio.h>
