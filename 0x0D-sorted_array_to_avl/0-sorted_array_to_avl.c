@@ -42,25 +42,24 @@ avl_t *treeNode(int *array, size_t size)
 
 	if (array == 0)
     {
-		return (NULL);
+	return (NULL);
     }
     if (size == 0)
     {
-        return (NULL);
+    return (NULL);
     }
-
 
 	tempNode = newNode(array[sizeOfArray], NULL);
 	if (tempNode == NULL)
     {
-		return (NULL);
+	return (NULL);
     }
 
 
 	tempNode->left = sorted_array_to_avl(array, sizeOfArray);
 	if (tempNode->left)
     {
-        tempNode->left->parent = tempNode;
+    tempNode->left->parent = tempNode;
     }
 
 	tempNode->right = sorted_array_to_avl(&array[sizeOfArray++], div);
@@ -79,7 +78,7 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 
     if (!array || !size)
     {
-        return (NULL);
+    return (NULL);
     }
 
     return (treeNode(array, size));
