@@ -8,44 +8,44 @@
   */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-	skiplist_t *nodeOne;
-	skiplist_t *nodeTwo;
-	int valueOne;
-	int valueTwo;
-
+	skiplist_t *nodeOne = list->express;
+	skiplist_t *nodeTwo = list;
 
 	if (list == NULL)
 	{
 		return (NULL);
 	}
-
-	while (nodeTwo->next && nodeTwo->n < value)
+	for (; nodeOne; nodeTwo = nodeOne, nodeOne = nodeOne->express)
 	{
-		nodeOne = nodeTwo;
-		if (nodeTwo->express)
+		printf("Value checked at index [%d] = [%d]",
+			nodeOne->index, nodeOne->n);
+		printf("\n");
+		if (nodeOne->n >= value || !nodeOne->express)
 		{
-			nodeTwo = nodeTwo->express;
-			printf("Value checked at index [%lu] = [%d]\n",
-				(int)nodeTwo->index, nodeTwo->n);
+			if (nodeOne->n < value && !nodeOne->express)
+			{
+				nodeTwo = nodeOne;
+				while (nodeOne->next)
+				{
+					nodeOne = nodeOne->next;
+				}
+			}
+			printf("Value found between indexes [%d] and [%d]",
+				nodeTwo->index, nodeOne->index);
+			printf("\n");
+			for (; nodeTwo; nodeTwo = nodeTwo->next)
+			{
+				printf("Value checked at index [%d] = [%d]",
+					nodeTwo->index, nodeTwo->n);
+				printf("\n");
+				if (nodeTwo->n == value)
+				{
+					return (nodeTwo);
+				}
+			}
 		}
-		else
-		{
-			while (nodeTwo->next)
-				nodeTwo = nodeTwo->next;
-		}
-	}
-	valueOne = (int)nodeOne->index;
-	valueTwo = (int)nodeTwo->index;
-	printf("Value found between indexes [%lu] and [%lu]\n", valueOne, valueTwo);
-	while (nodeOne && valueOne <= valueTwo)
-	{
-		printf("Value checked at index [%lu] = [%d]\n", valueOne, nodeOne->n);
-		if (nodeOne->n == value)
-		{
-			return (nodeOne);
-		}
-		valueOne++;
-		nodeOne = nodeOne->n;
+		nodeTwo = nodeOne;
+		nodeOne = nodeOne->express;
 	}
 	return (NULL);
 }
