@@ -10,7 +10,7 @@ request(SWAPI + SWepisode, async function (err, res, body) {
   if (err) return(console.log(err));
 
   const SWAPIcharacters = JSON.parse(body).characters;
-  for (let characters of SWAPIcharacters) {
+  for (const characters of SWAPIcharacters) {
     await new Promise(function (resolve, reject) {
       request(characters, function (err, res, body) {
         if (err) return(console.log(err));
