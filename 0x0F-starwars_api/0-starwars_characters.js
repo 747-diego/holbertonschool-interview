@@ -1,9 +1,9 @@
 #!/usr/bin/node
 
 const request = require('request');
-const SWepisode = process.argv;
+const SWepisode = process.argv[2] + '/';
 // EPISODE TWO CHARACTERISTICS
-const SWAPI = 'https://swapi-api.hbtn.io/api/films/' + SWepisode[2];
+const SWAPI = 'https://swapi-api.hbtn.io/api/films/';
 
 // REQUESTING STAR WARS API
 request(SWepisode + SWAPI, async function (err, res, body) {
