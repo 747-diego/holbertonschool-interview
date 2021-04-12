@@ -6,7 +6,7 @@ const SWepisode = process.argv[2] + '/';
 const SWAPI = 'https://swapi-api.hbtn.io/api/films/';
 
 // REQUESTING STAR WARS API
-request(SWepisode + SWAPI, async function (err, res, body) {
+request(SWAPI + SWepisode, async function (err, res, body) {
   if (err) return(console.log(err));
 
   const SWAPIcharacters = JSON.parse(body).characters;
