@@ -10,19 +10,17 @@ request(SWepisode + SWAPI, async function (err, res, body) {
   if (err) {
     return(console.error(err));
   }
-  else {
-    const SWAPIcharacters = JSON.parse(body).characters;
-    let characters;
-    for (characters of SWAPIcharacters) {
-      await new Promise(function (resolve, reject) {
+const SWAPIcharacters = JSON.parse(body).characters;
+let characters;
+for (characters of SWAPIcharacters) {
+    await new Promise(function (resolve, reject) {
         request(characters, function (err, res, body) {
-          if (err) {
+            if (err) {
             return(console.error(err));
-          }
-          console.error(JSON.parse(body).name);
-          resolve();
+            }
+            console.error(JSON.parse(body).name);
+            resolve();
         });
-      });
-    }
-  }
+    });
+}
 });
