@@ -8,7 +8,7 @@ const SWAPI = 'https://swapi-api.hbtn.io/api/films/';
 // REQUESTING STAR WARS API
 request(SWepisode + SWAPI, async function (err, res, body) {
   if (err) {
-    return(console.log(err));
+    return(console.error(err));
   }
   else {
     const SWAPIcharacters = JSON.parse(body).characters;
@@ -17,9 +17,9 @@ request(SWepisode + SWAPI, async function (err, res, body) {
       await new Promise(function (resolve, reject) {
         request(characters, function (err, res, body) {
           if (err) {
-            return(console.log(err));
+            return(console.error(err));
           }
-          console.log(JSON.parse(body).name);
+          console.error(JSON.parse(body).name);
           resolve();
         });
       });
