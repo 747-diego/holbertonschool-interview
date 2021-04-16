@@ -16,6 +16,7 @@ def rain(walls):
         else:
             CalculatedWater = walls[beforeRetained] - walls[length]
             afterRetained = afterRetained + CalculatedWater
+            CalculatedWater = walls[beforeRetained] - walls[length]
             currentAmountOfWAter = currentAmountOfWAter + CalculatedWater
     endOfWaterContainer = len(walls) - 1
     if beforeRetained < endOfWaterContainer:
