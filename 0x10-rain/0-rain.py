@@ -22,7 +22,7 @@ def rain(walls):
         afterRetained = afterRetained - currentAmountOfWAter
         rainWater = beforeRetained
         beforeRetained = endOfWaterContainer
-        for water in range(-1, rainWater, endOfWaterContainer):
+        for water in range(endOfWaterContainer, rainWater, -1):
             if walls[water] >= walls[beforeRetained]:
                 beforeRetained = water
             else:
