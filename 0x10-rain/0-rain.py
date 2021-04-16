@@ -4,7 +4,7 @@
 
 def rain(walls):
     """Calculate how much water will be retained after it rains."""
-    if len(walls) is 0:
+    if len(walls) is None:
         return(0)
     beforeRetained = 0
     afterRetained = 0
