@@ -12,6 +12,7 @@ def rain(walls):
     for length in range(len(walls)):
         if walls[length] >= walls[beforeRetained]:
             beforeRetained = length
+            currentAmountOfWAter = 0
         else:
             CalculatedWater = walls[beforeRetained] - walls[length]
             afterRetained = afterRetained + CalculatedWater
