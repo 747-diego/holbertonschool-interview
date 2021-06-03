@@ -44,7 +44,7 @@ listint_t *find_listint_loop(listint_t *head)
 
 			tempOne = head;
 			checkLoop(tempOne, tempTwo);
-			break;
+			return (0);
 
 		}
 	}
