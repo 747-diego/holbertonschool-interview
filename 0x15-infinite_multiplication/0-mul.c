@@ -58,12 +58,10 @@ int mul(char *str1, unsigned int len1, char *str2,
 	char *nodeMem;
 	int indexOne, indexTwo, node = 0, ParameterOne, ParameterTwo;
 	int product = 0, numOne = 0, numTwo = 0;
-	int testOne, testTwo;
 
 	indexOne = len1 - 1;
 	indexTwo = 0;
-	testOne = str1[indexOne] - '0';
-	testTwo = str2[indexTwo] - '0';
+
 
 	nodeMem = malloc(len3 * sizeof(char));
 	if (!nodeMem)
@@ -76,14 +74,14 @@ int mul(char *str1, unsigned int len1, char *str2,
 	while (indexOne >= 0)
 	{
 		node = 0;
-		ParameterOne = testOne;
+		ParameterOne = str1[indexOne] - '0';
 		numOne = 0;
 		indexTwo = len2 - 1;
 
 		/*for (indexTwo = len2 - 1; indexTwo >= 0; indexTwo--)*/
 		while (indexTwo >= 0)
 		{
-			ParameterTwo = testTwo;
+			ParameterTwo = str2[indexTwo] - '0';
 			product = ParameterOne * ParameterTwo + nodeMem[numOne + numTwo] + node;
 			node = product / 10;
 			nodeMem[numOne + numTwo] = product % 10;
