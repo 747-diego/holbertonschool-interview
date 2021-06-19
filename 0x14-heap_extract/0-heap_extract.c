@@ -1,5 +1,30 @@
 #include "binary_trees.h"
 
+void checkLeft(heap_t *firstNode, int shiftLeft, int length, int lengthSum)
+{
+    if (firstNode->left)
+    { 
+		shiftLeft = findSize(firstNode->left, lengthSum);
+    }
+	else
+    {
+		shiftLeft = length;
+    }
+
+}
+
+
+void checkRight(heap_t *firstNode, int shiftRight, int length, int lengthSum)
+{
+    if (firstNode->right)
+    {
+		shiftRight = findSize(firstNode->right, lengthSum);
+    }
+	else
+    {
+		shiftRight = length;
+    }
+}
 
 
 /**
@@ -13,12 +38,15 @@ int findSize(heap_t *firstNode, int length)
 	int shiftLeft = 0;
 	int shiftRight = 0;
 	int lengthSum = length + 1;
-	int checkDirection;
+
 
 	checkLeft(firstNode, shiftLeft, length, lengthSum);
 	checkRight(firstNode, shiftRight, length, lengthSum);
-	checkDirection = check(shiftLeft, shiftRight);
-	return (checkDirection);
+	if (shiftLeft > shiftRight)
+    {
+		return (shiftLeft);
+    }
+	return (shiftRight);
 }
 
 /**
