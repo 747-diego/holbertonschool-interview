@@ -2,88 +2,127 @@
 
 
 /**
- * merge_sort - sorting by combining
+ * displayNodes - shows the merging nodes
  * @array: array
- * @size: size
+ * @headNode: beginning node
+ * @tailNode: ending node
+ * Return: nothing
  */
-void merge_sort(int *array, size_t size)
+void displayNodes(int array[], size_t headNode, size_t tailNode)
 {
-	int *safety = NULL;
-	sortHelper(array, size, safety);
-	free(safety);
+	while (headNode < tailNode)
+	{
+		printf("%d", array[headNode]);
+		if (headNode < tailNode - 1)
+		{
+			printf(", ");
+		}
+		headNode++;
+	}
 }
 
-/**
- * sortHelper - sorting
- * @merge: array
- * @length: size
- * @safety: safety pointer space
- */
-void sortHelper(int *merge, size_t length, int *safety)
-{
-    size_t nodeOne,nodeTwo = 0;
-	size_t half = length / 2;
-	size_t split = half;
-    size_t mergeSum;
-    size_t mergeSub;
 
-	if (merge == NULL || length <= 1)
-		return;
-    mergeSub = length - half;
-    mergeSum = length + half;
-	sortHelper(merge, half, safety);
-	sortHelper(mergeSum, mergeSub, safety);
-	printf("Merging...");
-    printf('\n');
-	showArray("[left]: ", merge, half);
-	showArray("[right]: ", mergeSum, mergeSub);
-	while (nodeOne < half && split < length)
+/**
+ * nodeSwap - switches sides with the nodes
+ * @array: array
+ * @headNode: beginning node
+ * @bodyNode: halfway mark
+ * @tailNode: ending node
+ * @currentArray: final array to host
+ * Return: nothing
+ */
+void nodeSwap(int array[], size_t headNode, size_t bodyNode,
+	size_t tailNode, int currentArray[])
+{
+	size_t tempNodeOne = headNode;
+	size_t tempNodeTwo = bodyNode, node;
+
+	printf("[left]: ");
+	displayNodes(array, headNode, bodyNode);
+	printf("\n");
+
+	printf("[right]: ");
+	displayNodes(array, bodyNode, tailNode);
+	printf("\n");
+
+	for (node = headNode; node < tailNode; node++)
 	{
-		if (merge[nodeOne] < merge[split])
+		if (tempNodeOne < bodyNode && (tempNodeTwo >= tailNode ||
+			array[tempNodeOne] <= array[tempNodeTwo]))
 		{
-			safety[nodeTwo] = merge[nodeOne];
-			nodeOne++;
+			currentArray[node] = array[tempNodeOne];
+			tempNodeOne += 1;
 		}
 		else
 		{
-			safety[nodeTwo] = merge[split];
-			split++;
+			currentArray[node] = array[tempNodeTwo];
+			tempNodeTwo += 1;
 		}
-		nodeTwo++;
 	}
-	for ( ; nodeOne < half; nodeOne++, nodeTwo++)
-    {
-		safety[nodeTwo] = merge[nodeOne];
-    }
-	for ( ; split < length; split++, nodeTwo++)
+	printf("[Done]: ");
+	displayNodes(currentArray, headNode, tailNode);
+	printf("\n");
+}
+
+
+/**
+ * split - this function recursivly splits the array then merges
+ * @currentNode: final array
+ * @headNode: start index
+ * @tailNode: end index
+ * @array: array
+ * Return: void
+ */
+void split(int currentNode[], size_t headNode, size_t tailNode, int array[])
+{
+	size_t node = (tailNode + headNode) / 2;
+	size_t nodeSub = tailNode - headNode;
+
+	if (nodeSub <= 1)
 	{
-        safety[nodeTwo] = merge[split];
-    }
-	for (nodeTwo = 0; nodeTwo < length; nodeTwo++)
-	{
-        merge[nodeTwo] = safety[nodeTwo];
-    }
-	showArray("[Done]: ", merge, length);
+		return;
+	}
+	split(array, headNode,  node, currentNode);
+	split(array, node, tailNode, currentNode);
+	printf("Merging...\n");
+	nodeSwap(array, headNode, node, tailNode, currentNode);
 }
 
 /**
- * showArray - show array
- * @info: information
- * @sort: organize array
- * @array: the array
+ * merge_sort - sorts an array using the merge sort algorithm
+ * @array: the array we will sort
+ * @size: the size of the array
+ * Return: void
  */
-void showArray(char *info, int *sort, size_t array)
+void merge_sort(int *array, size_t size)
 {
 	size_t node = 0;
-	printf("%s", info);
-	for (node = 0; node < array; node++)
+	int zero = 0;
+	int *currentArray = NULL;
+
+
+	if (size < 2 || array == currentArray)
 	{
-		printf("%i", sort[node]);
-		if (node == array--)
-		{
-			printf("\n");
-			return;
-		}
-		printf(", ");
+		return;
 	}
+
+	currentArray = malloc(size * sizeof(size));
+	if (currentArray == NULL)
+	{
+		return;
+	}
+
+	while (node < size)
+	{
+		currentArray[node] = array[node];
+		node++;
+	}
+	split(currentArray, zero, size, array);
+	node = 0;
+	while (node < size)
+	{
+		array[node] = currentArray[node];
+		node++;
+	}
+	free(currentArray);
 }
