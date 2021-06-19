@@ -68,22 +68,22 @@ int checkIfLessThan(int indexOne, char *nodeMem)
 
 
 /**
- * string_multiply - multiplies 2 strings
- * @str1: First string
- * @len1: Length of first string
- * @str2: Second string
- * @len2: Length of second string
- * @len3: Length to store result string
- * Return: 0 or exit with error
+ * mul - big numbers being MULTIPLIED
+ * @firstNumber: big num one
+ * @numOneSize: big num one size
+ * @secondNumber: big num two
+ * @numTwoSize: big num two size
+ * @finalProduct: big big num from two nums
+ * Return: succes
  */
 
-int mul(char *str1, unsigned int len1, char *str2,
-		    unsigned int len2, unsigned int len3)
+int mul(char *firstNumber, unsigned int numOneSize, char *secondNumber,
+		    unsigned int numTwoSize, unsigned int finalProduct)
 {
-	char *nodeMem = malloc(len3 * sizeof(char));
+	char *nodeMem = malloc(finalProduct * sizeof(char));
 	int product = 0, numOne = 0, numTwo = 0, ParameterOne, ParameterTwo;
-	int indexOne = len1 - 1, indexTwo = 0, node = 0;
-	int test;
+	int indexOne = numOneSize - 1, indexTwo = 0, node = 0;
+	int success;
 
 	if (!nodeMem)
 	{
@@ -94,12 +94,12 @@ int mul(char *str1, unsigned int len1, char *str2,
 	while (indexOne >= 0)
 	{
 		node = 0;
-		ParameterOne = str1[indexOne] - '0';
+		ParameterOne = firstNumber[indexOne] - '0';
 		numOne = 0;
-		indexTwo = len2 - 1;
+		indexTwo = numTwoSize - 1;
 		while (indexTwo >= 0)
 		{
-			ParameterTwo = str2[indexTwo] - '0';
+			ParameterTwo = secondNumber[indexTwo] - '0';
 			product = ParameterOne * ParameterTwo + nodeMem[numOne + numTwo] + node;
 			node = product / 10;
 			nodeMem[numOne + numTwo] = product % 10;
@@ -112,7 +112,7 @@ int mul(char *str1, unsigned int len1, char *str2,
 		indexOne--;
 	}
 
-	indexOne = len3;
-	test = checkIfLessThan(indexOne, nodeMem);
-	return (test);
+	indexOne = finalProduct;
+	success = checkIfLessThan(indexOne, nodeMem);
+	return (success);
 }
