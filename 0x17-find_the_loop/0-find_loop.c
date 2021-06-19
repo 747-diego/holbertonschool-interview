@@ -1,55 +1,44 @@
 #include "lists.h"
 
 /**
- * checkLoop - checks if temp node is equal to node ahead
- * @nodeone: the temp node
- * @nodetwo: the second tempnode
- * Return: node
+ * findLoop - finds loop
+ * @numOne: node one
+ * @numTwo: node two
+ * Return: succes
  */
-listint_t checkLoop(listint_t *nodeone, listint_t *nodetwo)
+listint_t findLoop(listint_t *numOne, listint_t *numTwo)
 {
-
-
-    while (nodeone != nodetwo)
+    listint_t *firstNode = numOne;
+    listint_t *secondNode = numTwo;
+    while (firstNode != secondNode)
     {
-        nodeone = nodeone->next;
-        nodetwo = nodetwo->next;
+        firstNode = firstNode->next;
+        secondNode = secondNode->next;
     }
-    return (*nodeone);
-
-
+    return (*firstNode);
 }
 
 /**
- * find_listint_loop -  finds the loop in a linked list.
- * @head: beginning of list
- * Return: The address of the node where loop starts, or NULL if no loop
+ * find_listint_loop - Finds the start of a loop in a linked list
+ * @head: The start of the linked list
+ * Return: The node where a loop starts, otherwise Null
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	listint_t *tempOne = head;
-	listint_t *tempTwo = head;
 
+	listint_t *firstNode = head;
+    listint_t *secondNode = head;
 
-	while (tempTwo && tempTwo->next)
+    while (secondNode && secondNode->next)
 	{
-
-
-		tempOne = tempOne->next;
-		tempTwo = tempTwo->next->next;
-
-
-		if (tempOne == tempTwo)
-		{
-
-			tempOne = head;
-			checkLoop(tempOne, tempTwo);
-			return (0);
-
-		}
-	}
-
+		firstNode = firstNode->next;
+		secondNode = secondNode->next->next;
+        if (firstNode == secondNode)
+        {
+            firstNode = head;
+			*firstNode= findLoop(firstNode,secondNode);
+            return (firstNode);
+        }
+    }
 	return (NULL);
-
 }
-
