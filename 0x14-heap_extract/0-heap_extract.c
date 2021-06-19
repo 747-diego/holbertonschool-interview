@@ -5,21 +5,20 @@
 /**
  * findSize - find the length of array
  * @firstNode: ptr to head
- * @length: size of array 
+ * @length: size of array
  * Return: size
  */
 int findSize(heap_t *firstNode, int length)
 {
 	int shiftLeft = 0;
-    int shiftRight = 0;
-    int lengthSum = length + 1;
-    int checkDirection;
+	int shiftRight = 0;
+	int lengthSum = length + 1;
+	int checkDirection;
 
-
-    checkLeft(firstNode, shiftLeft, length, lengthSum);
-    checkRight(firstNode, shiftRight, length, lengthSum);
+	checkLeft(firstNode, shiftLeft, length, lengthSum);
+	checkRight(firstNode, shiftRight, length, lengthSum);
 	checkDirection = check(shiftLeft, shiftRight);
-    return (checkDirection);
+	return (checkDirection);
 }
 
 /**
@@ -33,21 +32,27 @@ heap_t *grabNode(heap_t *firstNode, int length, int lastNode)
 {
 	heap_t *shiftLeft;
 	heap_t *shiftRight;
-    int lengthSum = length + 1;
+	int lengthSum = length + 1;
 
 	if (length == lastNode)
-    {
+	{
 		return (firstNode);
-    }
+	}
 	shiftLeft = NULL;
 	shiftRight = NULL;
 
 	if (firstNode->left)
+	{
 		shiftLeft = grabNode(firstNode->left, lengthSum, lastNode);
+	}
 	if (firstNode->right)
+	{
 		shiftRight = grabNode(firstNode->right, lengthSum, lastNode);
+	}
 	if (shiftRight)
+	{
 		return (shiftRight);
+	}
 	return (shiftLeft);
 }
 
@@ -65,13 +70,13 @@ int heap_extract(heap_t **root)
 
 
 	if (root == NULL)
-    {
+	{
 		return (num);
-    }
-    if (*root == NULL)
-    {
-        return (num);
-    }
+	}
+	if (*root == NULL)
+	{
+		return (num);
+	}
 	num = (*root)->n;
 	node = grabNode(*root, 0, findSize(*root, 0));
 	if (node == *root)
@@ -82,13 +87,13 @@ int heap_extract(heap_t **root)
 	}
 	swap(*root, node);
 	if (node->parent->left == node)
-    {
+	{
 		node->parent->left = NULL;
-    }
+	}
 	else
 	{
-        node->parent->right = NULL;
-    }
+		node->parent->right = NULL;
+	}
 	free(node);
 	node = *root;
 	while (1)
@@ -97,21 +102,21 @@ int heap_extract(heap_t **root)
 		right = node->right;
 		tempNode = left;
 		if (left && right && (left->n < right->n))
-        {
+		{
 			tempNode = right;
-        }
+		}
 		if (left == NULL && right == NULL)
-        {
+		{
 			break;
-        }
+		}
 		if (tempNode->n > node->n)
-        {
+		{
 			swap(node, tempNode);
-        }
+		}
 		else
-        {
+		{
 			break;
-        }
+		}
 		node = tempNode;
 	}
 	return (num);
