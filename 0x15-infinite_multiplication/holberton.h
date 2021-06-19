@@ -2,17 +2,14 @@
 #define _MULTIPLICATION_H_
 
 /* HEADERS */
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 /* PROTOTYPES */
-char *sumUp(char *numone, char *numtwo);
-char *test(char *string);
 int _putchar(char c);
-int confirmingArgs(char *firstArgmuent, char *secondArgument);
-void doubleCheck(char *argument);
-int cases(char numCharacter);
-int checkIfNULL(char *string);
-char *testTempo(char *argumentone, char *argumenttwo, int size);
+int _strlen(char *str);
+void print_error(void);
+int mul(char *str1, unsigned int len1, char *str2, unsigned int len2, unsigned int len3);
 
 #endif
