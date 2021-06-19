@@ -1,22 +1,5 @@
 #include "lists.h"
 
-/**
- * findLoop - finds loop
- * @numOne: node one
- * @numTwo: node two
- * Return: succes
- */
-listint_t findLoop(listint_t *numOne, listint_t *numTwo)
-{
-    listint_t *firstNode = numOne;
-    listint_t *secondNode = numTwo;
-    while (firstNode != secondNode)
-    {
-        firstNode = firstNode->next;
-        secondNode = secondNode->next;
-    }
-    return (*firstNode);
-}
 
 /**
  * find_listint_loop - Finds the start of a loop in a linked list
@@ -36,7 +19,11 @@ listint_t *find_listint_loop(listint_t *head)
         if (firstNode == secondNode)
         {
             firstNode = head;
-			*firstNode= findLoop(firstNode,secondNode);
+			while (firstNode != secondNode)
+            {
+                firstNode = firstNode->next;
+                secondNode = secondNode->next;
+            }
             return (firstNode);
         }
     }
