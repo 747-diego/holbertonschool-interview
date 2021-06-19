@@ -43,6 +43,31 @@ int _strlen(char *str)
 }
 
 /**
+ * checkIfLessThan - checks if idx i < 0
+ * @indexOne: idx
+ * @nodeMem: allocated memory
+ * Return: success
+ */
+int checkIfLessThan(int indexOne, char *nodeMem)
+{
+	while (indexOne >= 0 && nodeMem[indexOne] == 0)
+		indexOne--;
+	if (indexOne < 0)
+	{
+		write(1, "0\n", 2);
+		free(nodeMem);
+		return (0);
+	}
+
+	for (; indexOne >= 0; indexOne--)
+		_putchar(nodeMem[indexOne] + '0');
+	_putchar('\n');
+	free(nodeMem);
+	return (0);
+}
+
+
+/**
  * string_multiply - multiplies 2 strings
  * @str1: First string
  * @len1: Length of first string
@@ -55,30 +80,23 @@ int _strlen(char *str)
 int mul(char *str1, unsigned int len1, char *str2,
 		    unsigned int len2, unsigned int len3)
 {
-	char *nodeMem;
-	int indexOne, indexTwo, node = 0, ParameterOne, ParameterTwo;
-	int product = 0, numOne = 0, numTwo = 0;
+	char *nodeMem = malloc(len3 * sizeof(char));
+	int product = 0, numOne = 0, numTwo = 0, ParameterOne, ParameterTwo;
+	int indexOne = len1 - 1, indexTwo = 0, node = 0;
+	int test;
 
-	indexOne = len1 - 1;
-	indexTwo = 0;
-
-
-	nodeMem = malloc(len3 * sizeof(char));
 	if (!nodeMem)
 	{
 		free(nodeMem);
 		write(1, "Error\n", 6);
 		exit(98);
 	}
-
 	while (indexOne >= 0)
 	{
 		node = 0;
 		ParameterOne = str1[indexOne] - '0';
 		numOne = 0;
 		indexTwo = len2 - 1;
-
-		/*for (indexTwo = len2 - 1; indexTwo >= 0; indexTwo--)*/
 		while (indexTwo >= 0)
 		{
 			ParameterTwo = str2[indexTwo] - '0';
@@ -88,38 +106,13 @@ int mul(char *str1, unsigned int len1, char *str2,
 			numOne++;
 			indexTwo--;
 		}
-
-
 		if (node > 0)
 			nodeMem[numOne + numTwo] += node;
 		numTwo++;
 		indexOne--;
 	}
 
-
-
 	indexOne = len3;
-	while (indexOne >= 0 && nodeMem[indexOne] == 0)
-		indexOne--;
-
-
-	if (indexOne < 0)
-	{
-		write(1, "0\n", 2);
-		free(nodeMem);
-		return (0);
-	}
-
-
-
-
-	for (; indexOne >= 0; indexOne--)
-		_putchar(nodeMem[indexOne] + '0');
-
-
-
-
-	_putchar('\n');
-	free(nodeMem);
-	return (0);
+	test = checkIfLessThan(indexOne, nodeMem);
+	return (test);
 }
