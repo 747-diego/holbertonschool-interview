@@ -8,6 +8,9 @@ def makeChange(coins, total):
     myCoins = 0
     coins = reversed(sorted(coins))
 
+    if total <= 0:
+        return 0
+
     for coin in coins:
         while pocketChange + coin <= total:
             myCoins += 1
@@ -15,6 +18,4 @@ def makeChange(coins, total):
 
     if pocketChange != total:
         return -1
-    if total <= 0:
-        return 0
     return myCoins
