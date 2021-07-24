@@ -21,7 +21,7 @@ void shiftLeft(int *line, size_t size)
 			{
 				line[numOne] = line[numTwo];
 				line[numTwo] = 0;
-				numOne -= 1;
+				numOne--;
 				continue;
 			}
 			if ( line[numOne] != 0 && line[numOne] == line[numTwo] )
