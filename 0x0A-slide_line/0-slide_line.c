@@ -1,94 +1,115 @@
 #include "slide_line.h"
-#include <stdio.h>
 
 /**
- * go_left - pushes line left
- * @line: list of integers
- * @size: size of list
+ * shiftLeft - pushes line left
+ * @line: line of numbers
+ * @size: how many numbers there are in total
  */
-void go_left(int *line, size_t size)
+void shiftLeft(int *line, size_t size)
 {
-	size_t i, j;
+	size_t numOne = 0;
+	size_t numTwo;
 
-	for (i = 0; i < size; i++)
+
+	for (numOne = 0; numOne < size; numOne++)
 	{
-		for (j = i + 1; j < size; j++)
+		for (numTwo = numOne + 1; numTwo < size; numTwo++)
 		{
-			if (line[i] == 0 && line[j] != 0)
+			if ( line[numTwo] != 0 && line[numOne] == 0 )
 			{
-				line[i] = line[j];
-				line[j] = 0;
-				i--;
-				break;
+				line[numOne] = line[numTwo];
+				line[numTwo] = 0;
+				numOne -= 1;
+				continue;
 			}
-			if (line[i] == line[j] && line[i] != 0)
+			if ( line[numOne] != 0 && line[numOne] == line[numTwo] )
 			{
-				line[i] *= 2;
-				line[j] = 0;
-				break;
+				line[numOne] = line[numOne] * 2;
+				line[numTwo] = 0;
+				continue;
 			}
-			else if (line[j] != 0 && line[i + 1] == 0)
+			else if ( line[numOne++] == 0 && line[numTwo] != 0 )
 			{
-				line[i + 1] = line[j];
-				line[j] = 0;
-				break;
+				line[numOne++] = line[numTwo];
+				line[numTwo] = 0;
+				continue;
 			}
+			/* numTwo++; */
 		}
+		/* numOne++;*/
 	}
 }
 
 /**
- * go_right - pushes line right
- * @line: list of integers
- * @size: size of list
+ * shiftRight - pushes line left
+ * @line: line of numbers
+ * @size: how many numbers there are in total
  */
-void go_right(int *line, size_t size)
+void shiftRight(int *line, size_t size)
 {
-	size_t i, j;
+	size_t numOne = 1;
+	size_t numTwo;
 
-	for (i = 1; i <= size; i++)
+	
+	while ( numOne <= size)
 	{
-		for (j = i + 1; j <= size; j++)
+		numTwo = numOne + 1;
+
+		while ( numTwo <= size )
 		{
-			if (line[size - i] == 0 && line[size - j] != 0)
+			if (line[size - numTwo] != 0 && line[size - numOne] == 0)
 			{
-				line[size - i] = line[size - j];
-				line[size - j] = 0;
-				i--;
-				break;
+				line[size - numOne] = line[size - numTwo];
+				line[size - numTwo] = 0;
+				numOne--;
+				continue;
 			}
-			if (line[size - i] == line[size - j] && line[size - i] != 0)
+			if (line[size - numOne] != 0 && line[size - numOne] == line[size - numTwo])
 			{
-				line[size - i] *= 2;
-				line[size - j] = 0;
-				break;
+				line[size - numOne] = line[size - numOne] * 2;
+				line[size - numTwo] = 0;
+				continue;
 			}
-			else if (line[size - j] != 0 && line[size - (i + 1)] == 0)
+			else if ( line[size - (numOne++)] == 0 && line[size - numTwo] != 0 )
 			{
-				line[size - (i + 1)] = line[size - j];
-				line[size - j] = 0;
-				break;
+				line[size - (numOne + 1)] = line[size - numTwo];
+				line[size - numTwo] = 0;
+				continue;
 			}
+			numTwo++;
 		}
+		numOne++;
 	}
 }
+
+
 /**
- * slide_line - slides line to left or right
- * @line: list of numbers to slide
- * @size: size of list
- * @direction: direction to slide
- *
- * Return: 1 if successful or 0 if fails
+ * slide_line - a function that slides and merges an array of integers
+ * @line: points to an array of integers
+ * @size: elements, that must be slided & merged to the direction represented
+ * @direction: can be either: SLIDE_LEFT or SLIDE_RIGHT
+ * Return: 1 upon success, or 0 upon failure
  */
 int slide_line(int *line, size_t size, int direction)
 {
 	if (!line || !size)
+	{
 		return (0);
+	}
+	
 	if (direction == 76)
-		go_left(line, size);
+	{
+		shiftLeft(line, size);
+	}
+	
 	else if (direction == 82)
-		go_right(line, size);
+	{
+		shiftRight(line, size);
+	}
+	
 	else
+	{
 		return (0);
+	}
 	return (1);
 }
