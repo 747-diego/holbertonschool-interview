@@ -9,6 +9,7 @@ if __name__ == "__main__":
               "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
 
     FileSize = 0
+    counter = 0
 
     def getLog(line):
         """Parse the logs and gets status code."""
