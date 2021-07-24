@@ -16,13 +16,13 @@ listint_t *insert_node(listint_t **head, int number)
 	if (!newNode)
 		return (NULL);
 
-
+	/* Moving over */
 	newNode->n = number;
     newNode->next = NULL;
 
     /* If the HEAD pointer doesnt exist, set the NEW NODE pointer-next to the HEAD pointer */
     /* and then set the HEAD pointer to the NEW NODE */
-	if (!*head)
+	if (!*head || number < (*head)->n)
 	{
 
 		newNode->next = *head;
