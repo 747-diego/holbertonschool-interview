@@ -152,6 +152,6 @@ heap_t *heap_insert(heap_t **root, int value)
 		swap(nodeTwo, nodeTwo->parent);
 	while (nodeTwo->parent)
 		nodeTwo = nodeTwo->parent;
-	*root = ((heap_t *)nodeTwo);
-	return (nodeTwo);
+	return (*root = ((heap_t *)nodeTwo));
+
 }
