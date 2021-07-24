@@ -63,10 +63,10 @@ void shiftRight(int *line, size_t size)
 			{
 				line[size - numOne] = line[size - numTwo];
 				line[size - numTwo] = 0;
-				numOne -= 1;
+				numOne--;
 				continue;
 			}
-			if (line[size - numOne] == line[size - numTwo] && line[size - numOne] != 0)
+			if (line[size - numOne] != 0 && line[size - numOne] == line[size - numTwo])
 			{
 				line[size - numOne] = line[size - numOne] * 2;
 				line[size - numTwo] = 0;
