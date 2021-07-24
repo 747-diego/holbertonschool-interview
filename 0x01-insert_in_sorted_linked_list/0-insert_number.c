@@ -37,7 +37,7 @@ listint_t *insert_node(listint_t **head, int number)
 
         /* While the content of the CURRENT NODE is less than the content of the NEW NODE */
         /* and if the CURRENT NODE pointer-next exists, then set the CURRENT NODE to pointer-next */
-		while (currentNode->next->n < newNode->n && currentNode->next)
+		while (currentNode->next && currentNode->next->n <= newNode->n)
 		{
 
 			currentNode = currentNode->next;
