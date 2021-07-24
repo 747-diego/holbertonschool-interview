@@ -11,17 +11,15 @@ void shiftLeft(int *line, size_t size)
 	size_t numTwo;
 
 
-	while (numOne < size)
+	for (numOne = 0; numOne < size; numOne++)
 	{
-
-		numTwo = numOne + 1;
-		while (numTwo < size)
+		for (numTwo = numOne + 1; numTwo < size; numTwo++)
 		{
 			if ( line[numTwo] != 0 && line[numOne] == 0 )
 			{
 				line[numOne] = line[numTwo];
 				line[numTwo] = 0;
-				numOne--;
+				numOne -= 1;
 				continue;
 			}
 			if ( line[numOne] != 0 && line[numOne] == line[numTwo] )
@@ -36,9 +34,9 @@ void shiftLeft(int *line, size_t size)
 				line[numTwo] = 0;
 				continue;
 			}
-			numTwo++;
+			/* numTwo++; */
 		}
-		numOne++;
+		/* numOne++;*/
 	}
 }
 
