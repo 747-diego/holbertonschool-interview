@@ -2,6 +2,7 @@
 #define SLIDELINEH
 
 #include <stddef.h>
+#include <stdio.h>
 
 #define SLIDE_LEFT 76
 #define SLIDE_RIGHT 82
