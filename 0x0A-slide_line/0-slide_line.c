@@ -66,7 +66,7 @@ void shiftingLeft(int *nodes, size_t lengthOfNodeList)
 			}
 			else if (nodes[numTwo] != 0 && nodes[numOne + 1] == 0)
 			{
-				nodes[numOne + 1] = nodes[numTwo];
+				nodes[numOne++] = nodes[numTwo];
 				nodes[numTwo] = 0;
 				break;
 			}
