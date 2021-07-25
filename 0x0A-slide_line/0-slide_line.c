@@ -18,12 +18,12 @@ void shiftingRight(int *nodes, size_t lengthOfNodeList)
 			{
 				nodes[lengthOfNodeList - nodeOne] = nodes[lengthOfNodeList - nodeTwo];
 				nodes[lengthOfNodeList - nodeTwo] = 0;
-				nodeOne--;
+				nodeOne - 1;
 				break;
 			}
 			if (nodes[lengthOfNodeList - nodeOne] == nodes[lengthOfNodeList - nodeTwo] && nodes[lengthOfNodeList - nodeOne] != 0)
 			{
-				nodes[lengthOfNodeList - nodeOne] *= 2;
+				nodes[lengthOfNodeList - nodeOne] = nodes[lengthOfNodeList - nodeOne] * 2;
 				nodes[lengthOfNodeList - nodeTwo] = 0;
 				break;
 			}
