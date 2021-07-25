@@ -93,7 +93,7 @@ int slide_line(int *line, size_t size, int direction)
 	}
 	else if (direction == 82)
 	{
-		shiftRight(line, size);
+		shiftingRight(line, size);
 	}
 	else
 	{
