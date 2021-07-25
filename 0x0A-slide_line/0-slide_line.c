@@ -29,7 +29,7 @@ void shiftingRight(int *nodes, size_t lengthOfNodeList)
 			}
 			else if (nodes[lengthOfNodeList - nodeTwo] != 0 && nodes[lengthOfNodeList - (nodeOne + 1)] == 0)
 			{
-				nodes[lengthOfNodeList - (nodeOne++)] = nodes[lengthOfNodeList - nodeTwo];
+				nodes[lengthOfNodeList - (nodeOne += 1)] = nodes[lengthOfNodeList - nodeTwo];
 				nodes[lengthOfNodeList - nodeTwo] = 0;
 				break;
 			}
