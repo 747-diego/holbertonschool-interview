@@ -55,12 +55,12 @@ void shiftingLeft(int *nodes, size_t lengthOfNodeList)
 			{
 				nodes[numOne] = nodes[numTwo];
 				nodes[numTwo] = 0;
-				numOne--;
+				numOne = numOne - 1;
 				break;
 			}
 			if (nodes[numOne] == nodes[numTwo] && nodes[numOne] != 0)
 			{
-				nodes[numOne] *= 2;
+				nodes[numOne] = nodes[numOne] * 2;
 				nodes[numTwo] = 0;
 				break;
 			}
