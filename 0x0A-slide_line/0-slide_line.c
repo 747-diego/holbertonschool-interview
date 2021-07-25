@@ -83,7 +83,7 @@ void shiftingLeft(int *nodes, size_t lengthOfNodeList)
  */
 int slide_line(int *line, size_t size, int direction)
 {
-	if (!line || !size)
+	if (!size || !line)
 	{
 		return (0);
 	}
