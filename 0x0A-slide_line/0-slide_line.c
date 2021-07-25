@@ -1,94 +1,85 @@
 #include "slide_line.h"
 
 /**
- * shiftLeft - pushes line left
- * @line: line of numbers
- * @size: how many numbers there are in total
+ * shiftingRight - move node
+ * @nodes: nodes
+ * @lengthOfNodeList: length of node array
  */
-void shiftLeft(int *line, size_t size)
+void shiftingRight(int *nodes, size_t lengthOfNodeList)
 {
-	size_t numOne = 0;
-	size_t numTwo;
+	size_t nodeOne;
+	size_t nodeTwo;
 
-
-	for (numOne = 0; numOne < size; numOne++)
+	for (nodeOne = 1; nodeOne <= lengthOfNodeList; nodeOne++)
 	{
-		for (numTwo = numOne + 1; numTwo < size; numTwo++)
+		for (nodeTwo = nodeOne + 1; nodeTwo <= lengthOfNodeList; nodeTwo++)
 		{
-			if ( line[numTwo] != 0 && line[numOne] == 0 )
+			if (nodes[lengthOfNodeList - nodeOne] == 0 && nodes[lengthOfNodeList - nodeTwo] != 0)
 			{
-				line[numOne] = line[numTwo];
-				line[numTwo] = 0;
-				numOne -= 1;
-				continue;
+				nodes[lengthOfNodeList - nodeOne] = nodes[lengthOfNodeList - nodeTwo];
+				nodes[lengthOfNodeList - nodeTwo] = 0;
+				nodeOne--;
+				break;
 			}
-			if ( line[numOne] != 0 && line[numOne] == line[numTwo] )
+			if (nodes[lengthOfNodeList - nodeOne] == nodes[lengthOfNodeList - nodeTwo] && nodes[lengthOfNodeList - nodeOne] != 0)
 			{
-				line[numOne] = line[numOne] * 2;
-				line[numTwo] = 0;
-				continue;
+				nodes[lengthOfNodeList - nodeOne] *= 2;
+				nodes[lengthOfNodeList - nodeTwo] = 0;
+				break;
 			}
-			else if ( line[numOne++] == 0 && line[numTwo] != 0 )
+			else if (nodes[lengthOfNodeList - nodeTwo] != 0 && nodes[lengthOfNodeList - (nodeOne + 1)] == 0)
 			{
-				line[numOne++] = line[numTwo];
-				line[numTwo] = 0;
-				continue;
+				nodes[lengthOfNodeList - (nodeOne + 1)] = nodes[lengthOfNodeList - nodeTwo];
+				nodes[lengthOfNodeList - nodeTwo] = 0;
+				break;
 			}
-			/* numTwo++; */
 		}
-		/* numOne++;*/
 	}
 }
 
 /**
- * shiftRight - pushes line left
- * @line: line of numbers
- * @size: how many numbers there are in total
+ * shiftingLeft - move node
+ * @nodes: nodes
+ * @lengthOfNodeLIst: length of node array
  */
-void shiftRight(int *line, size_t size)
+void shiftingLeft(int *nodes, size_t lengthOfNodeList)
 {
-	size_t numOne = 1;
+	size_t numOne;
 	size_t numTwo;
 
-	
-	while ( numOne <= size)
+	for (numOne = 0; numOne < lengthOfNodeList; numOne++)
 	{
-		numTwo = numOne + 1;
-
-		while ( numTwo <= size )
+		for (numTwo = numOne + 1; numTwo < lengthOfNodeList; numTwo++)
 		{
-			if (line[size - numTwo] != 0 && line[size - numOne] == 0)
+			if (nodes[numOne] == 0 && nodes[numTwo] != 0)
 			{
-				line[size - numOne] = line[size - numTwo];
-				line[size - numTwo] = 0;
+				nodes[numOne] = nodes[numTwo];
+				nodes[numTwo] = 0;
 				numOne--;
-				continue;
+				break;
 			}
-			if (line[size - numOne] != 0 && line[size - numOne] == line[size - numTwo])
+			if (nodes[numOne] == nodes[numTwo] && nodes[numOne] != 0)
 			{
-				line[size - numOne] = line[size - numOne] * 2;
-				line[size - numTwo] = 0;
-				continue;
+				nodes[numOne] *= 2;
+				nodes[numTwo] = 0;
+				break;
 			}
-			else if ( line[size - (numOne++)] == 0 && line[size - numTwo] != 0 )
+			else if (nodes[numTwo] != 0 && nodes[numOne + 1] == 0)
 			{
-				line[size - (numOne + 1)] = line[size - numTwo];
-				line[size - numTwo] = 0;
-				continue;
+				nodes[numOne + 1] = nodes[numTwo];
+				nodes[numTwo] = 0;
+				break;
 			}
-			numTwo++;
 		}
-		numOne++;
 	}
 }
 
-
 /**
- * slide_line - a function that slides and merges an array of integers
- * @line: points to an array of integers
- * @size: elements, that must be slided & merged to the direction represented
- * @direction: can be either: SLIDE_LEFT or SLIDE_RIGHT
- * Return: 1 upon success, or 0 upon failure
+ * slide_line - slides and merges an array of node content
+ * @line: node list
+ * @size: size of node list
+ * @direction: left or right
+ * Return: 1 or 0
  */
 int slide_line(int *line, size_t size, int direction)
 {
@@ -96,17 +87,14 @@ int slide_line(int *line, size_t size, int direction)
 	{
 		return (0);
 	}
-	
 	if (direction == 76)
 	{
-		shiftLeft(line, size);
+		shiftingLeft(line, size);
 	}
-	
 	else if (direction == 82)
 	{
 		shiftRight(line, size);
 	}
-	
 	else
 	{
 		return (0);
