@@ -12,7 +12,6 @@
 int validTree(binary_tree_t *head, int *tailnode, int *lengthOfTree, int *beginningOfTree, int sizeOfTree)
 {
 	int tree = 1;
-    int num = -2147483648;
 
     if (tree == 0)
     {
@@ -26,7 +25,7 @@ int validTree(binary_tree_t *head, int *tailnode, int *lengthOfTree, int *beginn
 		*lengthOfTree = sizeOfTree;
 	if (!(head->left && head->right))
     {
-		if (*beginningOfTree == num || sizeOfTree < *beginningOfTree)
+		if (*beginningOfTree == -2147483648 || sizeOfTree < *beginningOfTree)
         {
 			*beginningOfTree = sizeOfTree;
         }
