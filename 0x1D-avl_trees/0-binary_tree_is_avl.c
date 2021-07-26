@@ -17,13 +17,13 @@ int validTree(binary_tree_t *root, int *endTree, int *len, int *node, int size)
 	{
 		tree = validTree(root->left, endTree, len, node, size + 1);
 	}
+    if (size > *len)
+	{
+		*len = size;
+	}
 	if (tree == 0)
 	{
 		return (0);
-	}
-	if (size > *len)
-	{
-		*len = size;
 	}
 
 	if (!(root->left && root->right))
