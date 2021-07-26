@@ -1,57 +1,60 @@
 #include "binary_trees.h"
 
 /**
- * check_avl - Recursively check bst property and shape (in order traversal)
- * @node: The starting node to check
- * @last: The last node value checked
- * @max: The deepest depth of the tree so far
- * @min: The shallowest node missing at least one child
- * @depth: The current depth in the tree
- * Return: 0 if not an avl tree (short-circuit behavior), 1 if an avl tree
+ * validTree - tree to determine whethere it is valid
+ * @head: first ptr
+ * @tailnode: last ptr
+ * @lengthOfTree: size of ptr's
+ * @beginningOfTree: first ptr
+ * @sizeOfTree: size of all ptr's
+ * Return: tree
  */
-int check_avl(binary_tree_t *node, int *last, int *max, int *min, int depth)
+int validTree(binary_tree_t *head, int *tailnode, int *lengthOfTree, int *beginningOfTree, int sizeOfTree)
 {
-	int result = 1;
+	int tree = 1;
+    int num = -2147483648;
 
-	if (node->left)
-		result = check_avl(node->left, last, max, min, depth + 1);
-	if (result == 0)
+    if (tree == 0)
+    {
 		return (0);
-
-	if (depth > *max)
-		*max = depth;
-
-	if (!(node->left && node->right))
-		if (*min == -2147483648 || depth < *min)
-			*min = depth;
-
-	if (*max - *min > 1)
+    }
+	if (head->left)
+    {
+		tree = validTree(node->left, tailnode, lengthOfTree, beginningOfTree, sizeOfTree + 1);
+    }
+	if (sizeOfTree > *lengthOfTree)
+		*lengthOfTree = sizeOfTree;
+	if (!(head->left && head->right))
+    {
+		if (*beginningOfTree == num || sizeOfTree < *beginningOfTree)
+        {
+			*beginningOfTree = sizeOfTree;
+        }
+    }
+	if (*lengthOfTree - *beginningOfTree > 1)
+    {
 		return (0);
-
-	if (*last >= node->n)
+    }
+	if (*tailnode >= head->n)
+    {
 		return (0);
-
-	*last = node->n;
-
-	if (node->right)
-		result = check_avl(node->right, last, max, min, depth + 1);
-	if (result == 0)
+    }
+	*tailnode = head->n;
+	if (head->right)
+		tree = validTree(head->right, tailnode, lengthOfTree, beginningOfTree, sizeOfTree + 1);
+	if (tree == 0)
 		return (0);
 	return (1);
 }
 
 /**
- * binary_tree_is_avl - Check if a given tree is an avl tree
- * @tree: The starting node
- * Return: 1 if avl tree, 0 if not avl tree
+ * binary_tree_is_avl - tree is valid
+ * @tree: tree
+ * Return: valid or non valid
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-	int last = -2147483648;
-	int max = -2147483648;
-	int min = -2147483648;
-
-	if (!tree)
+	if (tree == NULL)
 		return (0);
-	return (check_avl((binary_tree_t *)tree, &last, &max, &min, 0));
+	return (validTree((binary_tree_t *)tree, &-2147483648, &-2147483648, &-2147483648, 0));
 }
