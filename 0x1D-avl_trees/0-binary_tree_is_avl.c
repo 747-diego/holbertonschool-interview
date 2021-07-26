@@ -17,7 +17,7 @@ int validTree(binary_tree_t *root, int *endTree, int *len, int *node, int size)
 	{
 		tree = validTree(root->left, endTree, len, node, size + 1);
 	}
-    if (size > *len)
+	if (size > *len)
 	{
 		*len = size;
 	}
