@@ -18,7 +18,7 @@ int validTree(binary_tree_t *head, int *tailnode, int *lengthOfTree, int *beginn
     {
 		return (0);
     }
-	if (head->left)
+	if (head->l left)
     {
 		tree = validTree(node->left, tailnode, lengthOfTree, beginningOfTree, sizeOfTree + 1);
     }
@@ -54,7 +54,11 @@ int validTree(binary_tree_t *head, int *tailnode, int *lengthOfTree, int *beginn
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
+    int tailnode = -2147483648;
+	int treelength = -2147483648;
+	int headnode = -2147483648;
+
 	if (tree == NULL)
 		return (0);
-	return (validTree((binary_tree_t *)tree, &-2147483648, &-2147483648, &-2147483648, 0));
+	return (validTree((binary_tree_t *)tree, &tailnode, &treelength, &headnode, 0));
 }
