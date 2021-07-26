@@ -55,9 +55,7 @@ int validTree(binary_tree_t *root, int *endOfTree, int *treeLength, int *node, i
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-    int node = -2147483648;
-	int end = -2147483648;
-	int length = -2147483648;
+    int node = -2147483648, end = -2147483648, length = -2147483648;
 
 	if (!tree)
 		return (0);
