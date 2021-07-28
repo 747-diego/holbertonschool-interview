@@ -26,9 +26,10 @@ int wildcmp(char *s1, char *s2)
 	{
 		if (*s1 != '\0')
 		{
-			return (wildcmp(stringOne, stringTwo + 1) ||
-			wildcmp(stringOne + 1, stringTwo));
+			compare = wildcmp(s1 + 1, s2);
 		}
+			return (wildcmp(stringOne, stringTwo + 1) || compare);
+
 	}
 	return (0);
 }
