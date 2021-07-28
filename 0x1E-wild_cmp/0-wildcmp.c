@@ -28,7 +28,7 @@ int wildcmp(char *s1, char *s2)
 		{
 			compare = wildcmp(s1 + 1, s2);
 		}
-			return (wildcmp(stringOne, stringTwo + 1) || compare);
+		return (wildcmp(stringOne, stringTwo + 1) || compare);
 
 	}
 	return (0);
