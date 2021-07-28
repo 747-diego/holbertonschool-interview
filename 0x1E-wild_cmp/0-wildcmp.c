@@ -11,7 +11,7 @@ int wildcmp(char *s1, char *s2)
 {
 	char *stringOne = s1;
 	char *stringTwo = s2;
-	/* char specialCharacter = '*'; */
+	char specialCharacter = '*';
 	int compare;
 
 
@@ -19,17 +19,16 @@ int wildcmp(char *s1, char *s2)
 		return (1);
 	if (*stringOne == *stringTwo)
 	{
-		compare = wildcmp(stringOne + 1, stringTwo + 1);
-		return (compare);
+		/* compare = wildcmp(stringOne + 1, stringTwo + 1); */
+		return (wildcmp(stringOne + 1, stringTwo + 1));
 	}
-	if (*stringTwo == '*')
+	if (*stringTwo == specialCharacter)
 	{
 		if (*stringOne != '\0')
 		{
 			compare = wildcmp(stringOne + 1, stringTwo);
 		}
 		return (wildcmp(stringOne, stringTwo + 1) || compare);
-
 	}
 	return (0);
 }
