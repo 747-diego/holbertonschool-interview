@@ -13,7 +13,6 @@ int wildcmp(char *s1, char *s2)
 	char *stringTwo = s2;
 	char specialCharacter = '*';
 	int compare;
-	int compareTwo;
 
 
 	if (*stringOne == '\0' && *stringTwo == '\0')
@@ -27,9 +26,9 @@ int wildcmp(char *s1, char *s2)
 	{
 		if (*s1 != '\0')
 		{
-			compareTwo = wildcmp(s1 + 1, s2);
+			compare = wildcmp(s1 + 1, s2);
 		}
-		return (wildcmp(stringOne, stringTwo + 1) || compareTwo);
+		return (wildcmp(stringOne, stringTwo + 1) || compare);
 
 	}
 	return (0);
