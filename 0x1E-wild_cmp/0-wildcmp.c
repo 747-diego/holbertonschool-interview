@@ -19,7 +19,7 @@ int wildcmp(char *s1, char *s2)
 		return (1);
 	if (*stringOne == *stringTwo)
 	{
-		compare = wildcmp(stringOne += 1, stringTwo += 1);
+		compare = wildcmp(stringOne + 1, stringTwo + 1);
 		return (compare);
 	}
 	if (*stringTwo == specialCharacter)
