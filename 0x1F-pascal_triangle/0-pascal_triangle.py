@@ -14,7 +14,7 @@ def pascal_triangle(n):
                 continue
             if integer == list:
                 angle.append(1)
-                continue 
+                continue
             down = lists[list - 1][integer]
             downOne = lists[list - 1][integer - 1]
             angle.append(downOne + down)
